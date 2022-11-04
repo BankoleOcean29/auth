@@ -34,6 +34,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   bool selected = false;
 
+  var title;
+
+  var code;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,10 +80,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     const SizedBox(
                       height: 30,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: TextField(
-                        decoration: InputDecoration(
+                        onChanged: (value) => title = value,
+                        decoration: const InputDecoration(
                             hintText: 'Codename',
                             prefixIcon: Icon(Icons.person),
                             enabledBorder: OutlineInputBorder(
@@ -92,11 +97,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     const SizedBox(
                       height: 50,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: TextField(
-                        
-                        decoration: InputDecoration(
+                        onChanged: (value) => code = value,
+                        decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.lock),
                             hintText: 'Password',
                             border: OutlineInputBorder(
@@ -111,9 +116,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            //selected = !selected;
-                          });
+                          if (title == name && code == password) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const User()),
+                                );
+                          }
+                          else {print('not working');}
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blueAccent),
